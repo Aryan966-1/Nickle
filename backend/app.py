@@ -18,6 +18,12 @@ from routes.wallet_routes import wallet_bp
 from routes.quiz_routes import quiz_bp
 from routes.dashboard_routes import dashboard_bp
 
+# to load environment variables from .env file
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)

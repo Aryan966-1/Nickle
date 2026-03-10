@@ -44,7 +44,9 @@ def submit_quiz():
     }
     """
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     user_id = data.get('user_id')
     answers = data.get('answers')
 

@@ -27,7 +27,9 @@ def deposit():
         "amount": 100.0
     }
     """
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     user_id = data.get('user_id')
     amount = data.get('amount')
     

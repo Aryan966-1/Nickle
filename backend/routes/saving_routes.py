@@ -22,7 +22,9 @@ def add_saving():
     }
     """
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     user_id = data.get('user_id')
     goal_id = data.get('goal_id')
     amount = data.get('amount')

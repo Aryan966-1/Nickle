@@ -26,7 +26,9 @@ def signup():
     }
     """
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     name = data.get('name')
     email = data.get('email')
     password = data.get('password')
@@ -69,7 +71,9 @@ def login():
     }
     """
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     email = data.get('email')
     password = data.get('password')
 
@@ -91,7 +95,9 @@ def login():
 @auth_bp.route('/forgot-password', methods=['POST'])
 def forgot_password():
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     email = data.get("email")
 
     if not email:
@@ -121,7 +127,9 @@ def forgot_password():
 @auth_bp.route('/verify-otp', methods=['POST'])
 def verify_otp():
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     email = data.get("email")
     otp = data.get("otp")
 
@@ -149,7 +157,9 @@ def verify_otp():
 @auth_bp.route('/reset-password', methods=['POST'])
 def reset_password():
 
-    data = request.json
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
     email = data.get("email")
     new_password = data.get("new_password")
 

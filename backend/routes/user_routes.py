@@ -27,7 +27,7 @@ def create_user():
         }
     }
     """
-    data = request.json
+    data = request.get_json(silent=True)
     if not data or not data.get('name') or not data.get('email'):
         return jsonify({'error': 'Name and email are required'}), 400
         
